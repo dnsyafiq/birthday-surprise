@@ -1,0 +1,620 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Happy Birthday, Sayang!</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(
+                135deg, #160b19, #42172e, #190e24
+            );
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 800px;
+            padding: 30px 20px;
+            text-align: center;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,182,193,0.3);
+            border-radius: 25px;
+            box-shadow: 0 0 40px #ff69b426;
+        }
+
+        .subtitle {
+            color: #ffb6d9;
+            font-size: 11px;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .cake {
+            font-size: 65px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        h1 {
+            color: #ff85b3;
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px #ff4081;
+        }
+
+        h2 {
+            color: #ffc2dc;
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #fce4ec;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            margin: 13px 0;
+            border: 1px solid #ff85b3;
+            border-radius: 15px;
+            background: #ff69b41f;
+            color: white;
+            font-size: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #d63384;
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px #d63384;
+        }
+
+        .flower-button {
+            background: linear-gradient(
+                135deg, #c2185b, #8e24aa
+            );
+            border: none;
+        }
+
+        .message {
+            display: none;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+            padding: 20px;
+            background: #ffb6c317;
+            border: 1px solid #ad527c;
+            border-radius: 15px;
+            animation: fadeIn 1s;
+        }
+
+        .message h3 {
+            color: #ff9bc6;
+            margin-bottom: 20px;
+        }
+
+        /* LOVE LETTER LAYOUT */
+
+        .letter-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .letter-text {
+            font-family: Georgia, serif;
+            padding: 18px 10px;
+            background: rgba(255,255,255,0.04);
+            border-radius: 15px;
+        }
+
+        .photo-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        /* POLAROID PHOTOS */
+
+        .polaroid {
+            background: #fff4f6;
+            padding: 7px 7px 12px;
+            border-radius: 3px;
+            color: #883c60;
+            box-shadow: 0 5px 15px #00000050;
+            transition: 0.4s;
+        }
+
+        .polaroid img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+        }
+
+        .polaroid span {
+            display: block;
+            font-family: cursive;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .photo-column:first-child .polaroid {
+            transform: rotate(-7deg);
+        }
+
+        .photo-column:last-child .polaroid {
+            transform: rotate(7deg);
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.06) !important;
+        }
+
+        /* FLOATING HEARTS BACKGROUND */
+
+        .heart {
+            position: fixed;
+            bottom: -40px;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp linear forwards;
+        }
+
+        .letter-heart {
+            position: absolute;
+            bottom: -30px;
+            pointer-events: none;
+            z-index: 1;
+            color: #ff85b3;
+            animation: letterFloat linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            15% {
+                opacity: 0.7;
+            }
+
+            100% {
+                transform: translateY(-120vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes letterFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            20% {
+                opacity: 0.35;
+            }
+
+            100% {
+                transform: translateY(var(--travel)) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .signature {
+            margin-top: 30px;
+            color: #ffaed2;
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        /* MOBILE PHONE DESIGN */
+
+        @media (max-width: 600px) {
+
+            h1 {
+                font-size: 29px;
+            }
+
+            h2 {
+                font-size: 20px;
+            }
+
+            .letter-content {
+                grid-template-columns: 1fr;
+                gap: 22px;
+            }
+
+            .photo-column {
+                flex-direction: row;
+                justify-content: center;
+                gap: 15px;
+            }
+
+            .polaroid {
+                width: 45%;
+                max-width: 150px;
+            }
+
+            .letter-text {
+                padding: 15px 5px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .heart, .letter-heart {
+                display: none;
+            }
+
+            .cake, .message {
+                animation: none;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="subtitle">
+            FOR MY FAVOURITE PERSON
+        </div>
+
+        <div class="cake">🎂</div>
+
+        <h1>HAPPY BIRTHDAY!</h1>
+
+        <h2>Nurul Syuhada ❤️</h2>
+
+        <p>
+            Saya saja je kasi nak kasi benda ni lambat sikit ehehehe
+            <br><br>
+            I ada something special for you.
+            I hope it makes you smile, sayang.
+        </p>
+
+        <!-- BIRTHDAY WISHES -->
+
+        <button class="button"
+                onclick="showMessage('birthday')">
+            🎂 Your Birthday Wishes
+        </button>
+
+        <div class="message" id="birthday">
+
+            <h3>Happy Birthday, My Love!</h3>
+
+            <p>
+                May this year bring you endless happiness,
+                good health, beautiful memories and
+                everything your heart wishes for.
+
+                <br><br>
+
+                May Allah always protect you,
+                ease your journey and bless you
+                with everything that is good for you.
+
+                <br><br>
+
+                I hope you will always have a reason
+                to smile, even on your hardest days.
+
+                <br><br>
+
+                I LOVEEE YOUUU SOOO MUCHHH! ❤️
+            </p>
+
+        </div>
+
+        <!-- LOVE LETTER WITH PHOTOS -->
+
+        <button class="button"
+                onclick="showMessage('letter')">
+            💌 A Letter From Me
+        </button>
+
+        <div class="message" id="letter">
+
+            <div class="letter-content">
+
+                <!-- LEFT SIDE PHOTOS -->
+
+                <div class="photo-column">
+
+                    <div class="polaroid">
+                        <img src="photo1.jpeg" alt="Our first memory">
+                        <span>My favourite person ♡</span>
+                    </div>
+
+                    <div class="polaroid">
+                        <img src="photo2.jpeg" alt="Our happy moments">
+                        <span>My happy place ♡</span>
+                    </div>
+
+                </div>
+
+                <!-- LOVE LETTER -->
+
+                <div class="letter-text">
+
+                    <h3>To My Favourite Person,</h3>
+
+                    <p>
+                        Thank you for coming into my life
+                        and making it so much more beautiful.
+
+                        <br><br>
+
+                        Your smile is my favourite sight,
+                        your voice is my favourite sound,
+                        and your happiness means so much to me.
+
+                        <br><br>
+
+                        I may not always be the perfect person,
+                        but I hope you know how much
+                        you mean to me.
+
+                        <br><br>
+
+                        If I had to choose you
+                        in every lifetime,
+                        I would choose you
+                        again and again.
+
+                        <br><br>
+
+                        Today, tomorrow and always,
+                        I will cherish you.
+
+                        <br><br>
+
+                        Happy birthday, sayang. ❤️
+
+                        <br><br>
+
+                        With all my love,
+                        <br>
+                        CAPIKKKK ♡
+                    </p>
+
+                </div>
+
+                <!-- RIGHT SIDE PHOTOS -->
+
+                <div class="photo-column">
+
+                    <div class="polaroid">
+                        <img src="photo3.jpeg" alt="Together with you">
+                        <span>Always you ♡</span>
+                    </div>
+
+                    <div class="polaroid">
+                        <img src="photo4.jpeg" alt="Beautiful memories">
+                        <span>Forever us ♡</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- SECRET MESSAGE -->
+
+        <button class="button"
+                onclick="showMessage('secret')">
+            🔐 A Little Secret For You
+        </button>
+
+        <div class="message" id="secret">
+
+            <h3>HEHEHEHE ❤️</h3>
+
+            <p>
+                Kalau sayang tertanya-tanya
+                kenapa saya buat semua ni...
+
+                <br><br>
+
+                Entah lah, saya pun tak tahu AHAHAHHA
+
+                <br><br>
+
+                Tak dapat nak bagi bunga waktu birthday sayang tapi,
+                saya buat bunga sendiri guna coding.
+
+                <br><br>
+
+                Bunga ni takkan layu,
+                and sayang boleh tengok bila-bila masa je.
+
+                <br><br>
+
+                DAH DAH, PERGI OPEN YOUR FLOWERS DEKAT BAWAH!
+                💐❤️
+            </p>
+
+        </div>
+
+        <!-- FLOWER SURPRISE -->
+
+        <a class="button flower-button"
+           href="https://dnsyafiq.github.io/birthday-surprise/">
+            💐 A Special Flower For You
+        </a>
+
+        <p style="font-size:12px; color:#ffb6d9;">
+            Psst... ada lagu tau nanti, sayang kena tekan button on lagu nanti dekat bawah.
+        </p>
+
+        <div class="signature">
+            MADE WITH LOVE BY CAPIKKKK ♡
+        </div>
+
+    </div>
+
+    <script>
+
+        // OPEN AND CLOSE MESSAGES
+
+        function showMessage(id) {
+
+            const selected = document.getElementById(id);
+            const isOpen = selected.style.display === "block";
+
+            document.querySelectorAll(".message")
+                .forEach(function(message) {
+                    message.style.display = "none";
+                });
+
+            if (!isOpen) {
+
+                selected.style.display = "block";
+
+                selected.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest"
+                });
+            }
+        }
+
+        // FLOATING HEARTS FOR WEBSITE
+
+        function createHeart() {
+
+            const heart = document.createElement("div");
+
+            const hearts = ["❤️", "💕", "💗", "♡", "💖"];
+
+            heart.className = "heart";
+
+            heart.setAttribute("aria-hidden", "true");
+
+            heart.textContent =
+                hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.fontSize =
+                Math.random() * 18 + 10 + "px";
+
+            const duration = Math.random() * 5 + 5;
+
+            heart.style.animationDuration =
+                duration + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(function() {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        setInterval(createHeart, 400);
+
+        // FLOATING HEARTS INSIDE LOVE LETTER
+
+        function createLetterHeart() {
+
+            const letter =
+                document.getElementById("letter");
+
+            if (letter.style.display !== "block") {
+                return;
+            }
+
+            const heart =
+                document.createElement("div");
+
+            heart.className = "letter-heart";
+
+            heart.setAttribute("aria-hidden", "true");
+
+            heart.textContent = "♥";
+
+            heart.style.left =
+                Math.random() * 100 + "%";
+
+            heart.style.fontSize =
+                Math.random() * 20 + 10 + "px";
+
+            heart.style.setProperty(
+                "--travel",
+                -(letter.clientHeight + 50) + "px"
+            );
+
+            const duration = Math.random() * 5 + 5;
+
+            heart.style.animationDuration =
+                duration + "s";
+
+            letter.appendChild(heart);
+
+            setTimeout(function() {
+                heart.remove();
+            }, duration * 1000);
+        }
+
+        setInterval(createLetterHeart, 350);
+
+    </script>
+
+</body>
+</html>
